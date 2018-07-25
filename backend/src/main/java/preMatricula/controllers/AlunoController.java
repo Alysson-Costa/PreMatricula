@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import preMatricula.models.Aluno;
 import preMatricula.models.Disciplina;
 import preMatricula.repositories.AlunoRepositorio;
+import preMatricula.repositories.DisciplinaRepositorio;
 
 @RestController
 @RequestMapping("/alunos")
@@ -24,6 +25,8 @@ public class AlunoController {
 	
 	@Autowired
 	AlunoRepositorio rep;
+	@Autowired
+	DisciplinaRepositorio drep;
 	
 	@GetMapping
 	public @ResponseBody List<Aluno> VerTodos(){
@@ -42,6 +45,10 @@ public class AlunoController {
 	
 	@DeleteMapping
 	public void Delete(@RequestBody Aluno a) {
+		for(Disciplina i :a.getDisciplinas()) {
+			i.getAlunos().remove(a);
+			drep.save(i);
+		}
 		rep.delete(a);
 	}
 	
@@ -62,6 +69,29 @@ public class AlunoController {
 		}
 		return null;
 	}
+	
+	@PutMapping("{idAluno}/matricular/{idDisciplina}")
+	public void matricular(@PathVariable long idAluno , @PathVariable long idDisciplina) {
+		Aluno a = rep.getOne(idAluno);
+		Disciplina d  = drep.getOne(idDisciplina);
+		
+		a.getDisciplinas().add(d);
+		d.getAlunos().add(a);
+		rep.save(a);
+		drep.save(d);
+	}
+	
+	@PutMapping("{idAluno}/remover/{idDisciplina}")
+	public void remover(@PathVariable long idAluno , @PathVariable long idDisciplina) {
+		Aluno a = rep.getOne(idAluno);
+		Disciplina d  = drep.getOne(idDisciplina);
+		
+		a.getDisciplinas().remove(d);
+		d.getAlunos().remove(a);
+		rep.save(a);
+		drep.save(d);
+	}
+	
 	
 	
 	

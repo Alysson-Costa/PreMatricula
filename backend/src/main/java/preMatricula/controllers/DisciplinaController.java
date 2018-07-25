@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import preMatricula.models.Aluno;
 import preMatricula.models.Disciplina;
+import preMatricula.repositories.AlunoRepositorio;
 import preMatricula.repositories.DisciplinaRepositorio;
 
 @RestController
@@ -24,6 +25,8 @@ public class DisciplinaController {
 	
 	@Autowired
 	DisciplinaRepositorio rep;
+	@Autowired
+	AlunoRepositorio arep;
 	
 	@GetMapping
 	public @ResponseBody List<Disciplina>VerTodos(){
@@ -42,6 +45,10 @@ public class DisciplinaController {
 	
 	@DeleteMapping
 	public void Delete(@RequestBody Disciplina a) {
+		for(Aluno i :a.getAlunos()) {
+			i.getDisciplinas().remove(a);
+			arep.save(i);
+		}
 		rep.delete(a);
 	}
 	

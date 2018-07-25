@@ -10,6 +10,6 @@ import java.util.List;
 public interface AlunoRepositorio extends JpaRepository<Aluno,Long> {
 	
 	
-	List<Aluno> findByEmail(String email);
+	Aluno findByEmail(String email);
 
 }
