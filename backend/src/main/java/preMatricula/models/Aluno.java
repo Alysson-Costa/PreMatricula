@@ -26,7 +26,6 @@ public class Aluno implements Serializable {
 	
 	private String matricula;
 	private String email;
-	private String senha;
 	
 	@ManyToMany
 	@JsonBackReference
@@ -53,13 +52,7 @@ public class Aluno implements Serializable {
 		this.email = email;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+	
 
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;

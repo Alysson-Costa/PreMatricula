@@ -43,8 +43,9 @@ public class AlunoController {
 		rep.save(a);
 	}
 	
-	@DeleteMapping
-	public void Delete(@RequestBody Aluno a) {
+	@DeleteMapping("{id}")
+	public void Delete(@PathVariable long id) {
+		Aluno a = rep.getOne(id);
 		for(Disciplina i :a.getDisciplinas()) {
 			i.getAlunos().remove(a);
 			drep.save(i);

@@ -43,8 +43,9 @@ public class DisciplinaController {
 		rep.save(a);
 	}
 	
-	@DeleteMapping
-	public void Delete(@RequestBody Disciplina a) {
+	@DeleteMapping("{id}")
+	public void Delete(@PathVariable long id) {
+		Disciplina a = rep.getOne(id);
 		for(Aluno i :a.getAlunos()) {
 			i.getDisciplinas().remove(a);
 			arep.save(i);

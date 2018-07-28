@@ -25,26 +25,21 @@ public class ValidarController {
 	
 	
 	
-	@GetMapping("validar/{email}/{senha}")
-	public @ResponseBody Aluno Email(@PathVariable String email , @PathVariable String senha) throws SenhaIncorretaException{
+	@GetMapping("validar/{email}")
+	public @ResponseBody Aluno Email(@PathVariable String email ){
 		
 		Aluno a = rep.findByEmail(email);
 		
 		if ( a == null) {
 			a = new Aluno();
 			a.setEmail(email);
-			a.setSenha(senha);
+		
 			rep.save(a);
 			return a;
 		}
 		
-		if(a.getSenha() == senha) {
-			return a;
-		}
+		return a;
 		
-		else {
-			throw new SenhaIncorretaException();
-		}
 	}
 	
 
