@@ -43,7 +43,14 @@
 
     <div>
 
+        <div ng-app="muralApp" ng-controller="MensagensDsp as vm">
+            <div ng-repeat="msg in vm.disciplinas" class="card border-dark mb-3" style="max-width: 100rem; margin: 10px;">
+                <div class="card-body"><input type="checkbox">{{msg.nome}} - {{msg.codigo}} - {{msg.carga}} - {{msg.periodo}} - {{msg.grade}}</div>
+                
 
+            </div>
+    
+        </div>
 
         <div class="card border-dark mb-3" style="max-width: 18rem; margin: 10px;">
             <div class="card-body">
@@ -60,6 +67,10 @@
     </div>
 
 
+    <!-- Angular Adicionado-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-auth.js"></script>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -68,6 +79,9 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="appMural.js"></script>
+    <script src="disciplina-controller.js"></script>
+    <script src="disciplina-service.js"></script>
 
 </body>
 
