@@ -1,33 +1,24 @@
 const app = angular.module("myApp",["ngRoute"])
 
-function AppCtrl(){
-    const  vm = this;
-    vm.msg = "oi vindo do controller"
-    vm.nome = "leo"
-    vm.estado = "solteiro"
-}
 
-function help(){
-    const vm = this;
-    vm.msg = 1
-    vm.m = 2
 
-}
+
 
 app.config(function($routeProvider){
     
     $routeProvider
     .when("/",{
-        templateUrl : "Login.html",
-        controller :  "LoginCtrl as vmm"
+        templateUrl : "Login/login.html"
+       
 
     })
     .when("/admin",{
-        templateUrl : "admin.html"
+        templateUrl : "Cordenador/cordenador.html"
         
     })
     .when("/aluno",{
-        templateUrl : "aluno.html"
+        templateUrl : "Aluno/aluno.html",
+        controller : "disciplinas as vm"
     })
     .otherwise( {
         redirectTo: "/"
@@ -35,5 +26,18 @@ app.config(function($routeProvider){
     })
 
 })
-app.controller("AppCtrl",AppCtrl);
-app.controller("help",help);
+
+
+
+
+app.controller("disciplinas",["Disciplinas","$http",function(Disciplinas){
+    vm = this
+    vm.disciplinas = Disciplinas.DisciplinaService().then(function(res){
+        vm.disciplinas = res;
+        console.log(disciplinas)
+    })
+}]);
+
+app.controller("teste",function(){
+
+})
