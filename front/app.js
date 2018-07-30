@@ -18,7 +18,7 @@ app.config(function($routeProvider){
     })
     .when("/aluno",{
         templateUrl : "Aluno/aluno.html",
-        controller : "disciplinas as vm"
+        controller : "MensagensDsp"
     })
     .otherwise( {
         redirectTo: "/"
