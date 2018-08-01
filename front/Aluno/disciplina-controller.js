@@ -1,9 +1,10 @@
 (function () {
   const app = angular.module('Disciplina');
-  app.controller('DisciplinaCtrl', function MensagensCtrl($http, $scope) {
-    $http.get('http://api-pre-matricula.herokuapp.com/disciplinas').
-        then(function(response) {
-            $scope.greeting = response.data;
-        });
+  app.controller('DisciplinaCtrl', function MensagensCtrl($http,$scope,DisciplinaService,DisciplinaEnviar) {
+  	
+    $scope.disciplina = DisciplinaService.array;
+    $scope.matricula = DisciplinaService.matricula;
+    $scope.enviar = DisciplinaEnviar.enviar;
+    
   });
 }());

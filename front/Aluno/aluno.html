@@ -41,35 +41,30 @@
         </nav>
     </header>
 
-    <div  ng-app="Disciplina" ng-controller="DisciplinaCtrl as vm">
+    <div  ng-app="Disciplina">
         
+        <div ng-controller="DisciplinaCtrl">
+
         <div>
-            <div ng-repeat="disciplina in greeting" class="card border-dark mb-3" style="max-width: 250px; margin: 10px;">
-                <div  class="card-body">
-                    {{disciplina.nome}}   -   {{disciplina.carga}}h
-                    <!-- <input type="checkbox">{{msg.nome}} - {{msg.codigo}} - {{msg.carga}} - {{msg.periodo}} - {{msg.grade}}</div>
-                    -->    
+            <p>Matricula: <input type="number" ng-model="matricula"></p>
+            
+        </div>
+        <div ng-repeat="msg in disciplina" class="card border-dark mb-3" style="max-width: 250px; margin: 10px;">
 
-
-            </div>
+                <div  class="card-body" >
+                <input type="checkbox" ng-model="msg.ad">{{msg.nome}} - {{msg.codigo}} - {{msg.carga}} - {{msg.periodo}} - {{msg.grade}}</div>    
+                </div>
+        </div>
+            <div ng-controller="DisciplinaCtrl">
+                    <button ng-click="enviar()">Matricular</button>
+                </div>
 
         </div>
 
-        <div class="card border-dark mb-3" style="max-width: 18rem; margin: 10px;">
-            <div class="card-body">
-                (Teste card) Programação I
-            </div>
-        </div>
 
-        <div class="card border-dark mb-3" style="max-width: 18rem; margin: 10px;">
-            <div class="card-body">
-                (Teste card) Lab. Programação I
-            </div>
-        </div>
+        
 
-    </div>
-
-
+    
     <!-- Angular Adicionado-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
@@ -84,7 +79,8 @@
         crossorigin="anonymous"></script>
     <script src="disciplinaApp.js"></script>
     <script src="disciplina-controller.js"></script>
-    
+    <script src="disciplina-service.js"></script>
+    <script src="enviar-service.js"></script>
 
 </body>
 
