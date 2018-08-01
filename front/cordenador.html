@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <title>Coordenador UI</title>
+
+</head>
+
+<body ng-app="Disciplina" ng-controller="DisciplinaCtrl as vm">
+    <header div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <a data-target="#modalNovaTurma" data-toggle="modal" href="#modalNovaTurma" class="nav-link text-white">Nova turma</a>
+                <a data-target="#exampleModalCenter" data-toggle="modal" href="#" class=" nav-link text-white">Iniciar matrícula</a>
+                <a data-target="#exampleModalCenter" data-toggle="modal" href="#" class=" nav-link text-white">Exportar dados</a>
+
+                <!-- <span class="text-muted">Toggleable via the navbar brand.</span> -->
+
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+            <a class="text-white navbar-brand d-flex justify-content-end">Alysson Araujo</a>
+        </nav>
+    </header>
+
+    <!--View  de disciplinas-->
+    <div>
+
+        <div>
+            <div ng-repeat="disciplina in disciplinasCadastradas" class="card border-dark mb-3" style="max-width: 250px; margin: 10px;">
+                <div class="card-body">
+                    {{disciplina.nome}} - {{disciplina.carga}}h
+                    <!-- <input type="checkbox">{{msg.nome}} - {{msg.codigo}} - {{msg.carga}} - {{msg.periodo}} - {{msg.grade}}</div>
+                    -->
+
+
+                </div>
+                <div ng-click="removerDisciplina()" style="color: red "> X </div>
+
+            </div>
+            <!-- <div class="card border-dark mb-3" style="max-width: 18rem; margin: 10px;">
+                <div class="card-body">
+                    (Teste card) Programação I
+                </div>
+            </div>
+
+            <div class="card border-dark mb-3" style="max-width: 18rem; margin: 10px;">
+                <div class="card-body">
+                    (Teste card) Lab. Programação I
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalNovaTurma" tabindex="-1" role="dialog" aria-labelledby="modalNovaTurma" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalNovaTurma">Cadastrar nova Turma</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--Corpo Modal-->
+                    <label for="recipient-name" class="col-form-label">Nome</label>
+                    <input type="text" class="form-control" ng-model="nome">
+                    <label for="recipient-name" class="col-form-label">Código</label>
+                    <input type="text" class="form-control" ng-model="codigo">
+                    <label for="recipient-name" class="col-form-label">Período</label>
+                    <input type="text" class="form-control" ng-model="periodo">
+                    <label for="recipient-name" class="col-form-label">Carga Horária</label>
+                    <input type="text" class="form-control" ng-model="cargaHoraria">
+                    <label for="recipient-name" class="col-form-label">Tipo(Obrigatória | Optativa)</label>
+                    <input type="text" class="form-control" ng-model="tipo">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" ng-click="novaTurma(nome, codigo, periodo)">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Angular Adicionado-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="disciplinaApp.js"></script>
+    <script src="disciplina-controller.js"></script>
+</body>
+
+</html>

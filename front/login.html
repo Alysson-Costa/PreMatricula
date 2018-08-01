@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="458511106805-58pakqr94pq207nh4o338lv2ckgd78fl.apps.googleusercontent.com">
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,600,700,400);
+
+    body {
+      margin: 0;
+      padding: 10%;
+      text-align: center;
+      font-family: 'Open Sans';
+      background: #F8F8F8;
+    }
+
+    .user {
+      padding: 50px 20px;
+      background: #FFFFFF;
+      border-radius: 2px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      width: 330px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    #user-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    h1 {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      font-weight: lighter;
+    }
+
+    #user-name {
+      color: #0066AA;
+      font-weight: bold;
+    }
+
+    #user-email {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      color: #0066AA;
+    }
+
+    .g-signin2,
+    .g-signin2 .abcRioButton {
+      display: block;
+      margin: 20px auto 0 auto;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body ng-app="Disciplina" ng-controller="DisciplinaCtrl as vm">
+
+<!-- Define controller for body. In this example we use only one controller for the scope of entire body. --><!-- Place a span that is going to act as a container for button rendering through script code. -->
+<span id="googleSignIn">
+    <span id="signInButton">      
+    </span>
+</span>
+
+<!-- Don't forget to place the script that does the asynchronous loading of Google+ JavaScript API.
+     Because it is loaded asynchronously, it might take some time to load. 
+     Place some loading notification, so user won't get confused. 
+     You can use ng-show and ng-hide to show or hide your notification and accomplish best user experience. --><script>// <![CDATA[
+    (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/client:plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+
+// ]]></script><!-- Second script needed for accessing Google API (gapi.*) . It's usage will be described in controller. --><script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
+  <button ng-click="getUserInfo()">ok</button>
+  <div class="g-signin2" data-onsuccess="onSignIn;entrar()"></div>
+  </span>
+  <a href="#" onclick="signOut()">Sign out</a>
+  <div class="user">
+    <img id="user-photo" src="https://mariovalney.com/wp-content/uploads/2015/06/user-anonimo.jpg">
+    <h1>Olá,
+      <span id="user-name">visitante</span>!</h1>
+    <p id="user-email"></p>
+    <button ng-click="email()"> ok </button>
+  </div>
+  <div ng-click="entrar(usuario)" ng-model="usuario" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" data-width="370" data-height="50" data-longtitle="true"
+    data-lang="pt-BR"></div>
+
+
+
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script>
+      function onSignIn(response) {
+           
+            var perfil = response.getBasicProfile();
+            var userID = perfil.getId();
+            var userName = perfil.getName();
+            var userEmail = perfil.getEmail();
+            var userPicture = perfil.getImageUrl();
+ 
+            document.getElementById('user-photo').src = userPicture;
+            document.getElementById('user-name').innerText = userName;
+            document.getElementById('user-email').innerText = userEmail;
+
+            // Recebendo o TOKEN que você usará nas demais requisições à API:
+            var LoR = response.getAuthResponse().id_token;
+            console.log("~ le Tolkien: " + LoR);
+        };
+
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+
+    (function () {
+      var p = document.createElement('script');
+      p.type = 'text/javascript';
+      p.async = true;
+      p.src = 'http://apis.google.com/js/client.js?onload=onLoadFunction';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(p, s);
+
+    })
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+  <script src="go.js" type="text/javascript"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+  <script src="disciplinaApp.js" type="text/javascript"></script>
+  <script src="disciplina-controller.js" type="text/javascript"></script>
+
+</body>
+
+</html>
